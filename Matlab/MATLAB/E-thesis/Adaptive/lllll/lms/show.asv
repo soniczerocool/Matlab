@@ -1,0 +1,29 @@
+
+mu=0.1;
+nord=12;
+Fs=12000;
+
+X=convm(x,nord);
+[A,E,y]= lms(X,d,mu,nord);
+
+
+figure
+plot(x)
+Title('x(n)')
+
+figure
+plot(y)
+Title('y(n)')
+
+
+figure
+plot(d)
+hold on
+plot(E,'r')
+Title('Expected Speech Signal')
+hold off
+% 
+% 
+% sound(E,Fs)
+% sound([d(:);E(:)],Fs)
+% sound([x(:);E(:)],Fs)

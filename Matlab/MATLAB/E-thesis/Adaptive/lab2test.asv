@@ -1,0 +1,63 @@
+%lab2 adaptive signal processing
+close all;
+clear all;
+fs=1/12000;
+t=0:fs:1;
+s=zeros(1,length(t));
+
+fc=10:5:20;
+
+for n=1:length(fc)
+   
+  A=2*sin(2*pi*fc(n)*t);
+  s=s+A;
+end
+
+ %now add noise to s
+ 
+ v=rand(1,length(s))
+% d=awgn(s,20);
+  d=s+v
+ SNR=20*log10(norm(s)/norm(v))
+  figure(2)
+ subplot(4,2,1)
+%  plot(t,s)
+plot(0:2499,signal(1:2500))
+title('s(n)without noise')
+ subplot(4,2,3)
+ plot(t,d)
+ title('d(n)after adding noise')
+ 
+ %spectrum of the signals
+ 
+ F_S=abs(fftshift(fft(s)));
+ F_D=abs(fftshift(fft(d)));
+ subplot(4,2,2)
+ plot(F_S)
+ subplot(4,2,4)
+ plot(F_D)
+ 
+ 
+ 
+filter_length =8 ;
+beta=.0541;
+
+% ha=adaptfilt.lms(filter_length,miu);
+% [y,e]=filter(ha,delayed_d,d);
+
+n0_delay=1;
+h = dfilt.delay(n0_delay);
+delayed_d=filter(h,d);
+
+
+x=delayed_d;
+X=convm(x,filter_length);
+[A,E,y]= nlms(X,d,beta,filter_length);
+ 
+subplot(4,2,5)
+
+plot(t,y)
+
+subplot(4,2,7)
+plot(t,E)
+title('error  e(t)');

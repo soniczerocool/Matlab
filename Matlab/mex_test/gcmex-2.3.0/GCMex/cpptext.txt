@@ -1,0 +1,40 @@
+
+///*do something*/
+      GCoptimizationGeneralGraph gc(MXS*MYS,2);
+  /* */
+    for(y=0;y<MYS;y++)
+    {
+        for(x=0;x<MXS;y++)
+        {
+          
+             if ((int)(mask[y*MXS+x])==255){
+              gc.setDataCost(y*MXS+x,0,10000);
+              gc.setDataCost(y*MXS+x,1,0);
+              
+            }else if ((int)(mask[y*MXS+x])==128){
+              gc.setDataCost(y*MXS+x,1,10000);
+              gc.setDataCost(y*MXS+x,0,0);}
+          else{
+             gc.setDataCost(y*MXS+x,0,0);
+             gc.setDataCost(y*MXS+x,1,0);
+         }
+   }
+    }
+   for(int y =0; y<MYS; y++ ){
+                for(int x =1; x< MXS; x++ ){
+                    
+                        int pixelIndex = y*MXS+x;
+                        float gradient = sqrt(pow(image[x+y*MXS]- image[x-1+y*MXS],2));
+                         gc.setNeighbors(x+y*MXS,x-1+y*MXS,(double)(1*exp(-gradient/sigma)));   
+                }
+   }
+ 
+  /*      gc.expansion(2);  
+        
+                 save results*/
+    int i=0;
+    for( int y=0;y<MYS;y++)
+            for( int x=0;x<MXS;x++,i++)
+                        c[y*MXS+x] =  image[y*MXS+x] + mask[y*MXS+x] ;
+                
+          //c[y*MXS+x] = gc.whatLabel(i)*255; 

@@ -1,0 +1,11 @@
+clear all;
+clc;
+load anc2_v4;
+%beta=1;
+mu=0.1;
+nord=2;
+Fs=12000;
+X=convm(x,nord);
+[A1,E1,y]= lms(X,d,mu,nord);
+%[A2,E2,y2]= nlms(X,d,beta,nord);
+%sound(y,Fs)

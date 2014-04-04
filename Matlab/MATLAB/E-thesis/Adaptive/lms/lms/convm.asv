@@ -1,0 +1,22 @@
+function X=convm(x,p);
+N = length(x)+2*p-2;
+x = 
+
+
+
+
+
+
+
+% if (nord==0)
+%     X=x;
+% else
+% m=length(x);
+% %X=zeros(m,nord);
+% X(1,:)=[x(1) zeros(1,nord)];
+% if m>1
+%     for k=2:m;
+%         X(k,:)=[x(k) X((k-1),1:nord)];
+%     end
+% end;    
+% end;

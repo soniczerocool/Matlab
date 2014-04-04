@@ -1,0 +1,27 @@
+function label,output = read_libsvm_probability_line(line,classes)
+% takes in a line as libsvm file format as 'label 1:x 2:y 3:z' and gives out [label x y z
+a = strread(line, '%s', 'delimiter', ' ');
+label = a(1);
+a(1)=[];
+output = zeros(1,length(a)-1);
+output(1) = a(1);
+classes(1)=[];
+for i=2:length(classes)
+    output(i) = a(classes(i))
+end
+
+% 
+% for i=1:length(a)-1
+%     output(i) = str2double(a(i+1));
+% end
+% 
+% output(end)=[];
+% 
+% [label x_str y_str z_str] = strread(line, '%s %s %s %s', 'delimiter', ' ');
+% [ix x] = strtok(x_str,'0');
+% [iy y] = strtok(y_str, '0');
+% [iz z] = strtok(z_str, '0');
+% x = str2double(x);
+% y = str2double(y);
+% z = str2double(z);
+% label = str2double(label);
